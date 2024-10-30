@@ -1,21 +1,22 @@
-// ProductCard.tsx
+// src/components/ProductCard.tsx
 import React from 'react';
-import { Product } from '../../config/product.data';
 
 interface ProductCardProps {
-    product: Product;
+    name: string;
+    price: number;
+    imageUrl: string;
+    onAddToCart: () => void;
 }
 
-const productCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ name, price, imageUrl, onAddToCart }) => {
     return (
         <div className="product-card">
-            <img src={product.image} alt={product.name} />
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <p>Giá: {product.price} VND</p>
-            <button>Mua ngay</button>
+            <img src={imageUrl} alt={name} />
+            <h3>{name}</h3>
+            <p>{price} VND</p>
+            <button onClick={onAddToCart}>Thêm vào giỏ hàng</button>
         </div>
     );
 };
 
-export default productCard;
+export default ProductCard;

@@ -1,19 +1,32 @@
+// src/App.tsx
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
-import Products from './pages/products';
+import Cart from './pages/cart';
+import About from './pages/about';
+import ProductDetail from './pages/productDetail';
+import Register from './pages/register';
+import Login from './pages/login';
+import Checkout from './pages/checkout';
+import Header from './components/header/header';
+import './App.css';
 
-function App() {
-  return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-      </Routes>
-    </div>
-  );
-}
+
+const App: React.FC = () => {
+    return (
+      <>
+        <Header />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/checkout" element={<Checkout />} />
+            </Routes>
+            </>
+    );
+};
 
 export default App;

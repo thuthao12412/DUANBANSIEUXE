@@ -1,13 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './slices/counter.slice'
+// src/stores/store.ts
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from './slices/cartSlide';
+import productsReducer from './slices/productsSlice';
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
-        counterState: counterReducer
+        cart: cartReducer,
+        products: productsReducer,
     },
-})
+});
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export default store;
