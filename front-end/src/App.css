@@ -95,7 +95,7 @@ body {
 
 /* Header styling */
 header {
-  background-color: #28a745;
+  background-color: gold;
   color: white;
   padding: 10px 20px;
   display: flex;
@@ -130,7 +130,7 @@ header nav a:hover {
 
 /* Button styling */
 button {
-  background-color: #28a745;
+  background-color: gold;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -140,7 +140,7 @@ button {
 }
 
 button:hover {
-  background-color: #218838;
+  background-color: bisque;
 }
 
 /* Input styling */
@@ -222,4 +222,71 @@ footer {
   bottom: 0;
   width: 100%;
   margin-top: 20px;
+}
+.auth-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-form input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.auth-form input:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 8px rgba(255, 107, 107, 0.2);
+}
+
+.auth-button {
+  background-color: #ff6b6b;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #ff4c4c;
+}
+
+.auth-link {
+  margin-top: 15px;
+  color: #666;
+}
+
+.auth-link a {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
 }

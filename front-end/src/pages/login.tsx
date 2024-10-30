@@ -1,31 +1,38 @@
-// src/pages/Login.tsx
 import React, { useState } from 'react';
 
+
 const Login: React.FC = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        // Xử lý đăng nhập người dùng
-        alert(`Đăng nhập thành công cho người dùng: ${username}`);
+    const handleLogin = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Handle login logic
     };
 
     return (
-        <div className="login">
+        <div className="auth-container">
             <h2>Đăng Nhập</h2>
-            <input 
-                type="text" 
-                placeholder="Tên đăng nhập" 
-                value={username} 
-                onChange={e => setUsername(e.target.value)} 
-            />
-            <input 
-                type="password" 
-                placeholder="Mật khẩu" 
-                value={password} 
-                onChange={e => setPassword(e.target.value)} 
-            />
-            <button onClick={handleLogin}>Đăng Nhập</button>
+            <form onSubmit={handleLogin} className="auth-form">
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Mật khẩu"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button type="submit" className="auth-button">Đăng Nhập</button>
+            </form>
+            <p className="auth-link">
+                Chưa có tài khoản? <a href="/register">Đăng ký</a>
+            </p>
         </div>
     );
 };
