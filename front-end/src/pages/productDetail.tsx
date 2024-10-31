@@ -1,16 +1,19 @@
 // src/pages/ProductDetail.tsx
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectProducts } from '../stores/slices/productsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectProducts, Product } from '../stores/slices/productsSlice';
+import { addItemToCart } from '../stores/slices/cartSlide';
 
 const ProductDetail: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+    const { productId } = useParams<{ productId: string }>();
     const products = useSelector(selectProducts);
-    const product = products.find(p => p.id === Number(id));
+    const dispatch = useDispatch();
+
+    const product = products.find((p) => p.id === parseInt(productId || '0'));
 
     if (!product) {
-        return <p>Không tìm thấy sản phẩm!</p>;
+        return <p>Không tìm thấy sản phẩm.</p>;
     }
 
     return (
@@ -18,7 +21,9 @@ const ProductDetail: React.FC = () => {
             <img src={product.imageUrl} alt={product.name} />
             <h2>{product.name}</h2>
             <p>Giá: {product.price} VND</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button onClick={() => dispatch(addItemToCart(product))}>
+                Thêm vào giỏ hàng
+            </button>
         </div>
     );
 };

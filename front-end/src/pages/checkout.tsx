@@ -1,34 +1,33 @@
 // src/pages/Checkout.tsx
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectCartItems } from '../stores/slices/cartSlide';
-import { selectProducts } from '../stores/slices/productsSlice';
+import React, { useState } from 'react';
 
 const Checkout: React.FC = () => {
-    const cartItems = useSelector(selectCartItems);
-    const products = useSelector(selectProducts);
-    const total = cartItems.reduce((sum, item) => {
-        const product = products.find(p => p.id === item.productId);
-        return sum + (product ? product.price * item.quantity : 0);
-    }, 0);
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
 
-    const handleCheckout = () => {
-        alert("Đơn hàng của bạn đã được đặt!");
+    const handleOrder = () => {
+        alert(`Đặt hàng thành công! Họ tên: ${name}, Địa chỉ: ${address}, Số điện thoại: ${phone}`);
     };
 
     return (
-        <div className="checkout">
-            <h2>Thanh Toán</h2>
-            {cartItems.map(item => {
-                const product = products.find(p => p.id === item.productId);
-                return (
-                    <div key={item.productId}>
-                        <p>{product?.name} - Số lượng: {item.quantity}</p>
-                    </div>
-                );
-            })}
-            <p>Tổng cộng: {total} VND</p>
-            <button onClick={handleCheckout}>Hoàn tất đơn hàng</button>
+        <div className="checkout-page">
+            <h2>Thông Tin Thanh Toán</h2>
+            <form onSubmit={(e) => { e.preventDefault(); handleOrder(); }}>
+                <label>
+                    Họ và tên:
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                </label>
+                <label>
+                    Địa chỉ:
+                    <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
+                </label>
+                <label>
+                    Số điện thoại:
+                    <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+                </label>
+                <button type="submit">Xác Nhận Đặt Hàng</button>
+            </form>
         </div>
     );
 };

@@ -1,25 +1,13 @@
 // src/pages/Home.tsx
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectProducts } from '../stores/slices/productsSlice';
-import { addItemToCart } from '../stores/slices/cartSlide';
-import ProductCard from '../components/product/productcard';
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
-    const products = useSelector(selectProducts);
-    const dispatch = useDispatch();
-
     return (
-        <div className="product-list">
-            {products.map(product => (
-                <ProductCard
-                    key={product.id}
-                    name={product.name}
-                    price={product.price}
-                    imageUrl={product.imageUrl}
-                    onAddToCart={() => dispatch(addItemToCart(product.id))}
-                />
-            ))}
+        <div className="home-page">
+            <h2>Chào mừng đến với Cửa Hàng Trái Cây!</h2>
+            <p>Chúng tôi cung cấp trái cây tươi ngon nhất mỗi ngày.</p>
+            <Link to="/products">Khám Phá Sản Phẩm</Link>
         </div>
     );
 };
