@@ -11,6 +11,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import './App.css';
 import Contact from './pages/contact';
+import Footer from './components/footer/footer';
 
 const App: React.FC = () => {
     // Sử dụng useSelector để lấy các sản phẩm trong giỏ
@@ -45,6 +46,7 @@ const App: React.FC = () => {
 <Route path="/register" element={<Register />} />
                 </Routes>
             </main>
+            <Footer />
         </Router>
     );
 };
