@@ -2,22 +2,24 @@
 import React, { useState } from 'react';
 
 const Register: React.FC = () => {
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-
-    const handleRegister = () => {
-        if (password === confirmPassword) {
-            alert(`Đăng ký thành công với email: ${email}`);
-        } else {
-            alert('Mật khẩu xác nhận không khớp');
-        }
+    
+    const handleRegister = (e: React.FormEvent) => {
+        e.preventDefault();
+        alert(`Tài khoản ${username} đã được tạo thành công.`);
+        // Thêm logic đăng ký, như lưu vào database hoặc Redux
     };
 
     return (
-        <div className="register-page">
+        <div className="auth-page">
             <h2>Đăng Ký</h2>
-            <form onSubmit={(e) => { e.preventDefault(); handleRegister(); }}>
+            <form onSubmit={handleRegister}>
+                <label>
+                    Tên đăng nhập:
+                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                </label>
                 <label>
                     Email:
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -25,10 +27,6 @@ const Register: React.FC = () => {
                 <label>
                     Mật khẩu:
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </label>
-                <label>
-                    Xác nhận mật khẩu:
-                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
                 </label>
                 <button type="submit">Đăng Ký</button>
             </form>

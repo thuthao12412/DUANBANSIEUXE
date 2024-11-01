@@ -10,6 +10,8 @@ const Header: React.FC = () => {
                 <Link to="/">Trang Chủ</Link>
                 <Link to="/about">Giới Thiệu</Link>
                 <Link to="/cart">Giỏ Hàng</Link>
+                <Link to="/checkout">Thanh Toán</Link>
+                <Link to="/contact">Liên Hệ</Link>
                 <Link to="/register">Đăng Ký</Link>
                 <Link to="/login">Đăng Nhập</Link>
             </nav>

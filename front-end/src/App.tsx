@@ -10,6 +10,7 @@ import { selectCartItems } from './stores/slices/cartSlide';
 import Login from './pages/login';
 import Register from './pages/register';
 import './App.css';
+import Contact from './pages/contact';
 
 const App: React.FC = () => {
     // Sử dụng useSelector để lấy các sản phẩm trong giỏ
@@ -27,6 +28,7 @@ const App: React.FC = () => {
                     {/* Hiển thị tổng số lượng sản phẩm trong giỏ */}
                     <Link to="/cart">Giỏ Hàng ({totalQuantity})</Link>
                     <Link to="/checkout">Thanh Toán</Link>
+                    <Link to="/contact">Liên Hệ</Link>
                     <Link to="/register">Đăng Ký</Link>
                     <Link to="/login">Đăng Nhập</Link>
                 </nav>
@@ -38,6 +40,7 @@ const App: React.FC = () => {
                     <Route path="/products" element={<Products />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/contact" element={<Contact />} />
                     <Route path="/login" element={<Login />} />
 <Route path="/register" element={<Register />} />
                 </Routes>

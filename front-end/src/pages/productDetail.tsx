@@ -3,7 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectProducts, Product } from '../stores/slices/productsSlice';
-import { addItemToCart } from '../stores/slices/cartSlide';
+import { addItem } from '../stores/slices/cartSlide';
 
 const ProductDetail: React.FC = () => {
     const { productId } = useParams<{ productId: string }>();
@@ -21,7 +21,7 @@ const ProductDetail: React.FC = () => {
             <img src={product.imageUrl} alt={product.name} />
             <h2>{product.name}</h2>
             <p>Giá: {product.price} VND</p>
-            <button onClick={() => dispatch(addItemToCart(product))}>
+            <button onClick={() => dispatch(addItem(product))}>
                 Thêm vào giỏ hàng
             </button>
         </div>
