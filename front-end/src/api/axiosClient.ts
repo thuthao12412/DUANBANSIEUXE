@@ -1,20 +1,24 @@
-import axios from "axios";
+import axios from 'axios';
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:5000',
-    timeout: 1000,
-    headers: { 'X-Custom-Header': 'foobar' }
+  baseURL: 'http://localhost:5000/api',  // Địa chỉ backend của bạn
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-axiosClient.interceptors.request.use(function (config) {
+// Thêm interceptor để thêm token vào header Authorization nếu có
+axiosClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
-}, function (error) {
+  },
+  (error) => {
     return Promise.reject(error);
-});
+  }
+);
 
-// Add a response interceptor
-axiosClient.interceptors.response.use(function (response) {
-    return response.data;
-}, function (error) {
-    return Promise.reject(error);
-});
+export default axiosClient;

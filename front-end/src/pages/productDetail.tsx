@@ -1,31 +1,36 @@
-// src/pages/ProductDetail.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectProducts, Product } from '../stores/slices/productsSlice';
-import { addItem } from '../stores/slices/cartSlide';
+import axiosClient from '../api/axiosClient';
 
 const ProductDetail: React.FC = () => {
-    const { productId } = useParams<{ productId: string }>();
-    const products = useSelector(selectProducts);
-    const dispatch = useDispatch();
+  const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<any | null>(null);
 
-    const product = products.find((p) => p.id === parseInt(productId || '0'));
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axiosClient.get(`/products/${id}`);
+        setProduct(response.data);
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
-    if (!product) {
-        return <p>Không tìm thấy sản phẩm.</p>;
-    }
+  if (!product) {
+    return <p>Loading...</p>;
+  }
 
-    return (
-        <div className="product-detail">
-            <img src={product.imageUrl} alt={product.name} />
-            <h2>{product.name}</h2>
-            <p>Giá: {product.price} VND</p>
-            <button onClick={() => dispatch(addItem(product))}>
-                Thêm vào giỏ hàng
-            </button>
-        </div>
-    );
+  return (
+    <div className="product-detail">
+      <img src={product.image} alt={product.name} />
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+      <p>Price: ${product.price}</p>
+      <button>Add to Cart</button>
+    </div>
+  );
 };
 
 export default ProductDetail;

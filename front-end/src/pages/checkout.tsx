@@ -1,37 +1,48 @@
-// src/pages/Checkout.tsx
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectCartItems, selectTotalPrice, clearCart } from '../stores/slices/cartSlide';
+import React, { useState } from 'react';
+import axiosClient from '../api/axiosClient';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout: React.FC = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const items = useSelector(selectCartItems);
-    const totalPrice = useSelector(selectTotalPrice);
+  const [address, setAddress] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const navigate = useNavigate();
 
-    const handleConfirmOrder = () => {
-        dispatch(clearCart());
-        alert('Đơn hàng của bạn đã được đặt thành công!');
-        navigate('/');
-    };
+  const handleCheckout = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axiosClient.post('/checkout', { address, phone });
+      if (response.status === 200) {
+        navigate('/account/orders');
+      }
+    } catch (error) {
+      setError('Thanh toán không thành công. Vui lòng thử lại.');
+    }
+  };
 
-    return (
-        <div>
-            <h2>Thanh Toán</h2>
-            <div>
-                {items.map(item => (
-                    <div key={item.id}>
-                        <p>{item.name}</p>
-                        <p>Giá: {item.price} VND</p>
-                        <p>Số lượng: {item.quantity}</p>
-                    </div>
-                ))}
-                <h3>Tổng tiền: {totalPrice} VND</h3>
-                <button onClick={handleConfirmOrder}>Xác Nhận Đặt Hàng</button>
-            </div>
-        </div>
-    );
+  return (
+    <div className="checkout-container">
+      <h1>Thanh Toán</h1>
+      {error && <p className="error-message">{error}</p>}
+      <form className="checkout-form" onSubmit={handleCheckout}>
+        <input
+          type="text"
+          placeholder="Địa chỉ nhận hàng"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Số điện thoại"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+        />
+        <button type="submit" className="checkout-button">Xác Nhận Đặt Hàng</button>
+      </form>
+    </div>
+  );
 };
 
 export default Checkout;
